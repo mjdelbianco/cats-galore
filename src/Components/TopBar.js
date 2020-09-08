@@ -4,7 +4,7 @@ import {Image, StyleSheet, View} from 'react-native';
 const TopBar = () => {
   return (
     <View style={styles.topbar}>
-      <Image style={styles.logo} source={require('./assets/logo1.png')} />
+      <Image style={styles.logo} source={require('../../assets/logo1.png')} />
     </View>
   );
 };

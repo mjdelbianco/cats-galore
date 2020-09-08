@@ -1,20 +1,22 @@
 import React, {useState} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import CatView from './CatView';
-import AddButton from './AddButton';
-import AddCatModal from './AddCatModal';
+import CatView from '../Components/CatView';
+import AddButton from '../Components/AddButton';
+import AddCatModal from '../Components/AddCatModal';
 
-const CatList = ({cats}) => {
+const CatList = ({cats, navigation}) => {
   const [isShown, setIsShown] = useState(false);
-
+  console.log(cats);
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
         <View style={styles.catList}>
-          {cats.map((cat, index) => (
-            <CatView cat={cat} key={index} />
-          ))}
+          {cats
+            .sort((a, b) => b.id - a.id)
+            .map((cat, index) => (
+              <CatView cat={cat} key={index} navigation={navigation} />
+            ))}
         </View>
       </ScrollView>
       <AddButton setIsShown={setIsShown} />

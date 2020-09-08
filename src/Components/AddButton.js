@@ -8,7 +8,7 @@ const AddButton = ({setIsShown}) => {
       onPress={() => {
         setIsShown(true);
       }}>
-      <Image style={styles.addIcon} source={require('./assets/plus.png')} />
+      <Image style={styles.addIcon} source={require('../../assets/plus.png')} />
     </TouchableOpacity>
   );
 };

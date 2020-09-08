@@ -3,6 +3,11 @@ export const setCatList = (cats) => ({
   payload: cats,
 });
 
+export const viewCat = (cat) => ({
+  type: 'VIEW_CAT',
+  payload: cat,
+});
+
 export const addCat = (cat) => ({
   type: 'ADD_CAT',
   payload: cat,
@@ -10,9 +15,10 @@ export const addCat = (cat) => ({
 
 export const deleteCat = (cat) => ({
   type: 'DELETE_CAT',
+  payload: cat,
 });
 
-export const modifyCat = (cat) => ({
-  type: 'MODIFY_CAT',
+export const editCat = (cat) => ({
+  type: 'EDIT_CAT',
   payload: cat,
 });
