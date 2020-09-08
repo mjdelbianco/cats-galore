@@ -30,6 +30,25 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
           style={{flex: 1, width: 100, height: 150, borderRadius: 5}}
           resizeMode="cover"
         />
+        {isEditable && (
+          <View
+            style={{
+              position: 'absolute',
+              left: 120,
+              bottom: 15,
+              padding: 5,
+
+              elevation: 1,
+            }}>
+            <ActionButton
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+              icon={require('../../assets/photo.png')}
+              action="changeImage"
+            />
+          </View>
+        )}
+
         <TextInput
           style={styles.catName}
           multiline={true}
@@ -102,12 +121,12 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
               icon={require('../../assets/user.png')}
               action="save"
             />
-            <ActionButton
+            {/* <ActionButton
               setSingleCat={setSingleCat}
               singleCat={singleCat}
               icon={require('../../assets/photo.png')}
               action="changeImage"
-            />
+            /> */}
           </>
         )}
         <ActionButton
