@@ -8,7 +8,10 @@ const AddButton = ({setIsShown}) => {
       onPress={() => {
         setIsShown(true);
       }}>
-      <Image style={styles.addIcon} source={require('../../assets/plus.png')} />
+      <Image
+        style={styles.addIcon}
+        source={require('../../assets/addNewCat.png')}
+      />
     </TouchableOpacity>
   );
 };
@@ -17,10 +20,6 @@ export default AddButton;
 
 const styles = StyleSheet.create({
   addButton: {
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     right: '10%',
   },
   addIcon: {
-    width: 30,
-    height: 30,
+    width: 110,
+    height: 110,
   },
 });

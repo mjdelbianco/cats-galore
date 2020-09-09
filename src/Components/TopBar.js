@@ -4,7 +4,7 @@ import {Image, StyleSheet, View} from 'react-native';
 const TopBar = () => {
   return (
     <View style={styles.topbar}>
-      <Image style={styles.logo} source={require('../../assets/logo1.png')} />
+      <Image style={styles.logo} source={require('../../assets/logoPaw.png')} />
     </View>
   );
 };
@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
   topbar: {
     height: '10%',
     justifyContent: 'flex-end',
-    backgroundColor: '#ebe2cf',
-    elevation: 5,
+    alignItems: 'center',
+    backgroundColor: '#0FAB4D',
   },
   logo: {
     height: '90%',
-    width: '100%',
+    width: '80%',
   },
 });

@@ -15,8 +15,8 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 //async storage
 import AsyncStorage from '@react-native-community/async-storage';
-//navigation
 
+//navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -41,6 +41,9 @@ const App = () => {
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
+              cardStyle: {
+                backgroundColor: 'white',
+              },
             }}>
             <Stack.Screen name="Home" component={CatList} />
             <Stack.Screen name="Detail" component={CatDetail} />
