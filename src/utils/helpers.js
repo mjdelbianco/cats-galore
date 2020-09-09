@@ -1,4 +1,4 @@
-import {PermissionsAndroid} from 'react-native';
+import {PermissionsAndroid, ToastAndroid} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
 export const chooseImage = async (fn, cat) => {
@@ -32,5 +32,19 @@ export const chooseImage = async (fn, cat) => {
         fn({...cat, image: source});
       }
     });
+  }
+};
+
+export const createCat = (newCat, addNewCat, setNewCat, setIsShown) => {
+  if (newCat.name && newCat.age && newCat.gender) {
+    addNewCat({...newCat, id: new Date()});
+    setNewCat({});
+    setIsShown(false);
+  } else {
+    ToastAndroid.showWithGravity(
+      'Your cat must have a name, age and gender',
+      ToastAndroid.LONG,
+      ToastAndroid.TOP,
+    );
   }
 };

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
+import {images, colors} from '../styles';
 
 const TopBar = () => {
   return (
-    <View style={styles.topbar}>
-      <Image style={styles.logo} source={require('../../assets/logoPaw.png')} />
+    <View style={styles.container}>
+      <Image style={styles.logo} source={images.logo} />
     </View>
   );
 };
@@ -12,11 +13,11 @@ const TopBar = () => {
 export default TopBar;
 
 const styles = StyleSheet.create({
-  topbar: {
+  container: {
     height: '10%',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#0FAB4D',
+    backgroundColor: colors.mainGreen,
   },
   logo: {
     height: '90%',

@@ -3,7 +3,8 @@ import {View, Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {editCat, deleteCat} from '../redux/actions';
-import ActionButton from '../Components/Button';
+import ActionButton from '../Components/ActionButton';
+import {images, colors, fonts} from '../styles';
 
 const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -22,7 +23,6 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
           backgroundColor: 'white',
           padding: 10,
           borderTopEndRadius: 30,
-
           borderTopStartRadius: 30,
         }}>
         <View
@@ -53,7 +53,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
               <ActionButton
                 setSingleCat={setSingleCat}
                 singleCat={singleCat}
-                icon={require('../../assets/photo.png')}
+                icon={images.selectImage}
                 action="changeImage"
               />
             </View>
@@ -107,11 +107,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
           }}>
           <ActionButton
             toggleEdit={toggleEdit}
-            icon={
-              isEditable
-                ? require('../../assets/close.png')
-                : require('../../assets/edit.png')
-            }
+            icon={isEditable ? images.close : images.edit}
             action="enableEdit"
           />
           <ActionButton
@@ -119,7 +115,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
             navigation={navigation}
             singleCat={singleCat}
             action="deleteCat"
-            icon={require('../../assets/trash.png')}
+            icon={images.delete}
           />
 
           {isEditable && (
@@ -128,7 +124,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
                 singleCat={singleCat}
                 updateCat={updateCat}
                 toggleEdit={toggleEdit}
-                icon={require('../../assets/user.png')}
+                icon={images.save}
                 action="save"
               />
             </>
@@ -136,7 +132,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
           <ActionButton
             navigation={navigation}
             action="goBack"
-            icon={require('../../assets/back.png')}
+            icon={images.back}
           />
         </View>
       </View>
@@ -162,10 +158,10 @@ export default connect(mapStateToProps, mapDispatch)(CatDetail);
 
 const styles = StyleSheet.create({
   catName: {
-    fontSize: 24,
+    fontSize: 34,
     marginHorizontal: 10,
     color: 'black',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: fonts.catName,
     flexWrap: 'wrap',
     width: '50%',
     flex: 1,
@@ -175,10 +171,11 @@ const styles = StyleSheet.create({
     paddingVertical: 1,
     color: 'black',
     fontSize: 16,
+    fontFamily: fonts.text,
   },
   backgroundContainer: {
     flex: 1,
-    backgroundColor: '#0FAB4D',
+    backgroundColor: colors.mainGreen,
     paddingTop: 10,
   },
 });

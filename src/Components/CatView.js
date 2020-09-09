@@ -2,6 +2,8 @@ import React from 'react';
 import {Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {viewCat} from '../redux/actions';
 import {connect} from 'react-redux';
+import {images, colors, fonts} from '../styles';
+import MyText from './MyText';
 
 const CatView = ({cat, navigation, viewCat}) => {
   return (
@@ -12,7 +14,7 @@ const CatView = ({cat, navigation, viewCat}) => {
         viewCat(cat);
       }}>
       <Image
-        source={{uri: cat.image || 'https://placekitten.com/200/300'}}
+        source={{uri: cat.image || images.catPlaceholder}}
         style={styles.catImage}
       />
       <Text style={styles.catName}>{cat.name}</Text>
@@ -20,18 +22,13 @@ const CatView = ({cat, navigation, viewCat}) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    // cat: state.cat,
-  };
-};
-
 const mapDispatch = (dispatch) => {
   return {
     viewCat: (cat) => dispatch(viewCat(cat)),
   };
 };
-export default connect(mapStateToProps, mapDispatch)(CatView);
+
+export default connect(() => ({}), mapDispatch)(CatView);
 
 const styles = StyleSheet.create({
   catListItem: {
@@ -39,17 +36,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
     elevation: 1,
-    backgroundColor: '#F5FADD',
+    backgroundColor: colors.mainGreen,
     borderRadius: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '40%',
   },
   catName: {
-    fontSize: 16,
+    fontSize: 22,
     textAlign: 'center',
     flexWrap: 'wrap',
-    padding: 3,
+    fontFamily: fonts.catName,
   },
   catImage: {
     width: '100%',

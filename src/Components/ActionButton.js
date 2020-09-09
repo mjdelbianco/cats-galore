@@ -29,8 +29,8 @@ const ActionButton = ({
     if (action === 'goBack') return navigation.navigate('Home');
   };
   return (
-    <TouchableOpacity style={styles.addButton} onPress={() => actionOnPress()}>
-      <Image style={styles.addIcon} source={icon} />
+    <TouchableOpacity style={styles.container} onPress={() => actionOnPress()}>
+      <Image style={styles.icon} source={icon} />
     </TouchableOpacity>
   );
 };
@@ -38,7 +38,7 @@ const ActionButton = ({
 export default ActionButton;
 
 const styles = StyleSheet.create({
-  addButton: {
+  container: {
     width: 40,
     height: 40,
     borderRadius: 50,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     margin: 5,
     elevation: 1,
   },
-  addIcon: {
+  icon: {
     width: 30,
     height: 30,
   },

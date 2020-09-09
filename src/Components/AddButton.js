@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {images} from '../styles';
 
 const AddButton = ({setIsShown}) => {
   return (
@@ -8,10 +9,7 @@ const AddButton = ({setIsShown}) => {
       onPress={() => {
         setIsShown(true);
       }}>
-      <Image
-        style={styles.addIcon}
-        source={require('../../assets/addNewCat.png')}
-      />
+      <Image style={styles.addIcon} source={images.addIcon} />
     </TouchableOpacity>
   );
 };
