@@ -3,7 +3,6 @@ import {Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {viewCat} from '../redux/actions';
 import {connect} from 'react-redux';
 import {images, colors, fonts} from '../styles';
-import MyText from './MyText';
 
 const CatView = ({cat, navigation, viewCat}) => {
   return (
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
     elevation: 1,
-    backgroundColor: colors.mainGreen,
+    backgroundColor: colors.lightBorder,
     borderRadius: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',

@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: '10%',
-    right: '10%',
+    bottom: '7%',
+    right: '7%',
   },
   addIcon: {
     width: 110,

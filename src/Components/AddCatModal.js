@@ -6,7 +6,7 @@ import {addCat} from '../redux/actions';
 import {TextInput} from 'react-native-gesture-handler';
 import {chooseImage, createCat} from '../utils/helpers';
 import {images, fonts, colors} from '../styles';
-import MyText from './MyText';
+import AddInput from './AddInput';
 
 const AddCatModal = ({isShown, setIsShown, addNewCat}) => {
   const [newCat, setNewCat] = useState({});
@@ -25,7 +25,7 @@ const AddCatModal = ({isShown, setIsShown, addNewCat}) => {
         <View style={styles.topContainer}>
           <Image
             source={{
-              uri: newCat.image || 'https://placekitten.com/200/300',
+              uri: newCat.image || images.catPlaceholder,
             }}
             style={styles.catImage}
           />
@@ -46,36 +46,11 @@ const AddCatModal = ({isShown, setIsShown, addNewCat}) => {
           />
         </View>
 
-        <View style={{flex: 3, justifyContent: 'center'}}>
-          <MyText text="Age" />
-          <TextInput
-            style={styles.inputInfo}
-            placeholder="Add age"
-            onChangeText={(age) => setNewCat({...newCat, age})}
-            value={newCat.age}
-            keyboardType="number-pad"
-          />
-          <MyText text="Gender" />
-          <TextInput
-            style={styles.inputInfo}
-            placeholder="Add gender"
-            onChangeText={(gender) => setNewCat({...newCat, gender})}
-            value={newCat.gender}
-          />
-          <MyText text="Breed" />
-          <TextInput
-            style={styles.inputInfo}
-            placeholder="Add breed"
-            onChangeText={(breed) => setNewCat({...newCat, breed})}
-            value={newCat.breed}
-          />
-          <MyText text="Traits" />
-          <TextInput
-            style={styles.inputInfo}
-            placeholder="Add traits"
-            onChangeText={(traits) => setNewCat({...newCat, traits})}
-            value={newCat.traits}
-          />
+        <View style={styles.infoContainer}>
+          <AddInput property="age" newCat={newCat} setNewCat={setNewCat} />
+          <AddInput property="gender" newCat={newCat} setNewCat={setNewCat} />
+          <AddInput property="breed" newCat={newCat} setNewCat={setNewCat} />
+          <AddInput property="traits" newCat={newCat} setNewCat={setNewCat} />
         </View>
 
         <TouchableOpacity
@@ -99,35 +74,40 @@ export default connect(() => ({}), mapDispatch)(AddCatModal);
 const styles = StyleSheet.create({
   modal: {
     justifyContent: 'center',
-    backgroundColor: '#000000aa',
+    backgroundColor: colors.modalTransparent,
     margin: 0,
     flex: 1,
   },
   modalView: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 15,
     height: '70%',
     marginHorizontal: 35,
-    padding: 10,
+    padding: 20,
   },
-  topContainer: {flex: 2, justifyContent: 'center', alignSelf: 'center'},
+  topContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 15,
+  },
   catImage: {
-    width: 120,
-    height: 120,
-    marginBottom: 15,
+    width: 150,
+    height: 150,
+    marginTop: 15,
     alignSelf: 'center',
     borderRadius: 100,
   },
   imagePicker: {
     position: 'absolute',
-    right: 60,
+    right: 40,
     borderWidth: 1,
     borderRadius: 100,
     padding: 5,
-    backgroundColor: 'white',
-    borderColor: 'whitesmoke',
+    backgroundColor: colors.white,
+    borderColor: colors.lightBorder,
     elevation: 1,
   },
   nameStyle: {
@@ -137,32 +117,20 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     fontFamily: fonts.catName,
   },
-  inputInfo: {
-    height: 25,
-    fontSize: 16,
-    paddingVertical: 0,
-    paddingHorizontal: 2,
-    margin: 2,
-    marginBottom: 5,
-    borderColor: colors.lightBorder,
-    borderBottomWidth: 2,
-    borderRightWidth: 2,
-    width: 250,
-    fontFamily: fonts.text,
-  },
+  infoContainer: {flex: 3, justifyContent: 'center'},
   create: {
-    backgroundColor: colors.mainGreen,
+    backgroundColor: colors.primaryDark,
     width: 200,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    padding: 7,
-    borderRadius: 25,
+    padding: 15,
+    borderRadius: 10,
     marginVertical: 20,
     width: 200,
   },
   createText: {
     fontSize: 16,
-    color: colors.limeGreen,
+    color: colors.primaryLight,
   },
 });

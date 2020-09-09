@@ -1,55 +1,34 @@
 import React, {useState} from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {editCat, deleteCat} from '../redux/actions';
 import ActionButton from '../Components/ActionButton';
+import UpdateInput from '../Components/UpdateInput';
 import {images, colors, fonts} from '../styles';
 
 const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
   const [isEditable, setIsEditable] = useState(false);
-  const toggleEdit = (action) => {
-    setIsEditable(!isEditable);
-    action !== 'save' && setSingleCat(cat);
-  };
+
   const [singleCat, setSingleCat] = useState(cat);
 
   return (
     <View style={styles.backgroundContainer}>
-      <View
-        style={{
-          flex: 1,
-          padding: 10,
-          backgroundColor: 'white',
-          padding: 10,
-          borderTopEndRadius: 30,
-          borderTopStartRadius: 30,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: 'whitesmoke',
-            borderRadius: 5,
-            elevation: 5,
-            alignSelf: 'center',
-            padding: 10,
-            margin: 10,
-          }}>
+      <View style={styles.container}>
+        <View style={styles.topContainer}>
           <Image
-            source={{uri: singleCat.image || 'https://placekitten.com/200/300'}}
-            style={{flex: 1, width: 100, height: 150, borderRadius: 5}}
+            source={{uri: singleCat.image || images.catPlaceholder}}
+            style={styles.catImage}
             resizeMode="cover"
           />
           {isEditable && (
-            <View
-              style={{
-                position: 'absolute',
-                left: 120,
-                bottom: 15,
-                padding: 5,
-
-                elevation: 1,
-              }}>
+            <View style={styles.imagePicker}>
               <ActionButton
                 setSingleCat={setSingleCat}
                 singleCat={singleCat}
@@ -58,7 +37,6 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
               />
             </View>
           )}
-
           <TextInput
             style={styles.catName}
             multiline={true}
@@ -70,45 +48,63 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
             {singleCat.name}
           </TextInput>
         </View>
-
-        <TextInput
-          style={[
-            styles.mainInfo,
-            isEditable
-              ? {
-                  borderWidth: 1,
-                  borderColor: '#ebe2cf',
-                  borderRadius: 3,
-                  paddingVertical: 1,
-                }
-              : null,
-          ]}
-          editable={isEditable}
-          textAlignVertical="center"
-          underlineColorAndroid="transparent"
-          onChangeText={(breed) => setSingleCat({...singleCat, breed})}>
-          {singleCat.breed}
-        </TextInput>
-        <TextInput
-          style={styles.mainInfo}
-          editable={isEditable}
-          underlineColorAndroid="transparent"
-          onChangeText={(age) => setSingleCat({...singleCat, age})}>
-          {singleCat.age}
-        </TextInput>
         <View
           style={{
             flex: 1,
-            flexDirection: 'row-reverse',
-            margin: 10,
-            position: 'absolute',
-            bottom: '5%',
-            right: '5%',
+            backgroundColor: colors.white,
+            padding: 10,
+            borderRadius: 25,
+            marginVertical: 5,
+            marginHorizontal: 10,
           }}>
+          <ScrollView>
+            <UpdateInput
+              property="age"
+              isEditable={isEditable}
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+            />
+            <UpdateInput
+              property="gender"
+              isEditable={isEditable}
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+            />
+            <UpdateInput
+              property="breed"
+              isEditable={isEditable}
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+            />
+            <UpdateInput
+              property="traits"
+              isEditable={isEditable}
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+            />
+            <UpdateInput
+              property="alergies"
+              isEditable={isEditable}
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+            />
+            <UpdateInput
+              property="description"
+              isEditable={isEditable}
+              setSingleCat={setSingleCat}
+              singleCat={singleCat}
+            />
+          </ScrollView>
+        </View>
+
+        <View style={{flexDirection: 'row-reverse', marginHorizontal: 30}}>
           <ActionButton
-            toggleEdit={toggleEdit}
+            setIsEditable={setIsEditable}
+            isEditable={isEditable}
+            cat={cat}
             icon={isEditable ? images.close : images.edit}
             action="enableEdit"
+            setSingleCat={setSingleCat}
           />
           <ActionButton
             removeCat={removeCat}
@@ -117,17 +113,15 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
             action="deleteCat"
             icon={images.delete}
           />
-
           {isEditable && (
-            <>
-              <ActionButton
-                singleCat={singleCat}
-                updateCat={updateCat}
-                toggleEdit={toggleEdit}
-                icon={images.save}
-                action="save"
-              />
-            </>
+            <ActionButton
+              singleCat={singleCat}
+              updateCat={updateCat}
+              icon={images.save}
+              action="save"
+              setIsEditable={setIsEditable}
+              isEditable={isEditable}
+            />
           )}
           <ActionButton
             navigation={navigation}
@@ -157,6 +151,35 @@ const mapDispatch = (dispatch) => {
 export default connect(mapStateToProps, mapDispatch)(CatDetail);
 
 const styles = StyleSheet.create({
+  backgroundContainer: {
+    flex: 1,
+    backgroundColor: colors.mainGreen,
+    paddingTop: 10,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderTopEndRadius: 30,
+    borderTopStartRadius: 30,
+    paddingVertical: 20,
+  },
+  topContainer: {
+    flexDirection: 'row',
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    elevation: 5,
+    alignSelf: 'center',
+    padding: 10,
+    marginBottom: 10,
+    marginHorizontal: 20,
+  },
+  catImage: {flex: 1, width: 100, height: 150, borderRadius: 5},
+  mainInfo: {
+    paddingVertical: 1,
+    color: 'black',
+    fontSize: 16,
+    fontFamily: fonts.text,
+  },
   catName: {
     fontSize: 34,
     marginHorizontal: 10,
@@ -167,15 +190,19 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
   },
-  mainInfo: {
-    paddingVertical: 1,
-    color: 'black',
-    fontSize: 16,
-    fontFamily: fonts.text,
+  imagePicker: {
+    position: 'absolute',
+    left: 120,
+    bottom: 15,
+    padding: 5,
+    elevation: 1,
   },
-  backgroundContainer: {
+  actionContainer: {
     flex: 1,
-    backgroundColor: colors.mainGreen,
-    paddingTop: 10,
+    flexDirection: 'row-reverse',
+    margin: 10,
+    position: 'absolute',
+    top: '31%',
+    right: '3%',
   },
 });
