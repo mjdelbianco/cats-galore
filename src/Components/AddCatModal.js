@@ -3,7 +3,6 @@ import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import {connect} from 'react-redux';
 import {addCat} from '../redux/actions';
-import {TextInput} from 'react-native-gesture-handler';
 import {chooseImage, createCat} from '../utils/helpers';
 import {images, fonts, colors} from '../styles';
 import AddInput from './AddInput';
@@ -37,12 +36,11 @@ const AddCatModal = ({isShown, setIsShown, addNewCat}) => {
               style={{height: 25, width: 25}}
             />
           </TouchableOpacity>
-          <TextInput
-            style={[styles.inputInfo, styles.nameStyle]}
-            placeholder="Add name"
-            onChangeText={(name) => setNewCat({...newCat, name})}
-            value={newCat.name}
-            maxLength={20}
+          <AddInput
+            property="name"
+            newCat={newCat}
+            setNewCat={setNewCat}
+            styling={styles.nameStyle}
           />
         </View>
 
@@ -50,13 +48,12 @@ const AddCatModal = ({isShown, setIsShown, addNewCat}) => {
           <AddInput property="age" newCat={newCat} setNewCat={setNewCat} />
           <AddInput property="gender" newCat={newCat} setNewCat={setNewCat} />
           <AddInput property="breed" newCat={newCat} setNewCat={setNewCat} />
-          <AddInput property="traits" newCat={newCat} setNewCat={setNewCat} />
         </View>
 
         <TouchableOpacity
           style={styles.create}
           onPress={() => createCat(newCat, addNewCat, setNewCat, setIsShown)}>
-          <Text style={styles.createText}> CREATE CAT ENTRY</Text>
+          <Text style={styles.createText}>CREATE CAT ENTRY</Text>
         </TouchableOpacity>
       </View>
     </Modal>
@@ -73,36 +70,37 @@ export default connect(() => ({}), mapDispatch)(AddCatModal);
 
 const styles = StyleSheet.create({
   modal: {
-    justifyContent: 'center',
     backgroundColor: colors.modalTransparent,
     margin: 0,
     flex: 1,
   },
   modalView: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
     borderRadius: 15,
-    height: '70%',
+    maxHeight: '70%',
     marginHorizontal: 35,
+    marginBottom: '25%',
     padding: 20,
   },
   topContainer: {
     flex: 2,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignSelf: 'center',
-    marginTop: 15,
   },
   catImage: {
-    width: 150,
-    height: 150,
-    marginTop: 15,
+    width: 130,
+    height: 130,
+    marginVertical: 10,
     alignSelf: 'center',
-    borderRadius: 100,
+    borderRadius: 130 / 2,
   },
   imagePicker: {
     position: 'absolute',
-    right: 40,
+    right: 50,
+    top: 70,
     borderWidth: 1,
     borderRadius: 100,
     padding: 5,
@@ -116,6 +114,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: 'transparent',
     fontFamily: fonts.catName,
+    marginHorizontal: 5,
   },
   infoContainer: {flex: 3, justifyContent: 'center'},
   create: {
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 15,
     borderRadius: 10,
-    marginVertical: 20,
+    marginBottom: 40,
     width: 200,
   },
   createText: {

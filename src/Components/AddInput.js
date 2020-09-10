@@ -3,16 +3,19 @@ import {StyleSheet, Text, TextInput} from 'react-native';
 import {colors, fonts} from '../styles';
 import MyText from '../Components/MyText';
 
-const AddInput = ({property, setNewCat, newCat}) => {
+const AddInput = ({property, setNewCat, newCat, styling}) => {
   return (
     <>
-      <MyText text={property[0].toUpperCase() + property.slice(1)} />
+      {property !== 'name' && (
+        <MyText text={property[0].toUpperCase() + property.slice(1)} />
+      )}
       <TextInput
-        style={styles.inputInfo}
+        style={[styles.inputInfo, {...styling}]}
         placeholder={`Add ${property}`}
-        onChangeText={(props) => setNewCat({...newCat, [property]: props})}
+        onChangeText={(text) => setNewCat({...newCat, [property]: text})}
         value={newCat[property]}
-        maxLength={50}
+        maxLength={property === 'age' ? 2 : 20}
+        keyboardType={property === 'age' ? 'numeric' : 'default'}
       />
     </>
   );
@@ -22,7 +25,7 @@ export default AddInput;
 
 const styles = StyleSheet.create({
   inputInfo: {
-    height: 25,
+    minHeight: 25,
     fontSize: 16,
     paddingVertical: 0,
     paddingHorizontal: 2,

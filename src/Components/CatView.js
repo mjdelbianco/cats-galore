@@ -16,7 +16,9 @@ const CatView = ({cat, navigation, viewCat}) => {
         source={{uri: cat.image || images.catPlaceholder}}
         style={styles.catImage}
       />
-      <Text style={styles.catName}>{cat.name}</Text>
+      <Text style={styles.catName} textBreakStrategy="simple">
+        {cat.name + ' '}
+      </Text>
     </TouchableOpacity>
   );
 };

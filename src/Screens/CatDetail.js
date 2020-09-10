@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Image,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {View, Image, StyleSheet, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {editCat, deleteCat} from '../redux/actions';
@@ -48,6 +42,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
             {singleCat.name}
           </TextInput>
         </View>
+
         <View
           style={{
             flex: 1,
@@ -97,7 +92,7 @@ const CatDetail = ({cat, updateCat, removeCat, navigation}) => {
           </ScrollView>
         </View>
 
-        <View style={{flexDirection: 'row-reverse', marginHorizontal: 30}}>
+        <View style={styles.actionContainer}>
           <ActionButton
             setIsEditable={setIsEditable}
             isEditable={isEditable}
@@ -174,16 +169,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   catImage: {flex: 1, width: 100, height: 150, borderRadius: 5},
-  mainInfo: {
-    paddingVertical: 1,
-    color: 'black',
-    fontSize: 16,
-    fontFamily: fonts.text,
-  },
   catName: {
     fontSize: 34,
     marginHorizontal: 10,
-    color: 'black',
+    color: colors.black,
     fontFamily: fonts.catName,
     flexWrap: 'wrap',
     width: '50%',
@@ -197,12 +186,14 @@ const styles = StyleSheet.create({
     padding: 5,
     elevation: 1,
   },
+  mainInfo: {
+    paddingVertical: 1,
+    color: colors.black,
+    fontSize: 16,
+    fontFamily: fonts.text,
+  },
   actionContainer: {
-    flex: 1,
     flexDirection: 'row-reverse',
-    margin: 10,
-    position: 'absolute',
-    top: '31%',
-    right: '3%',
+    marginHorizontal: 30,
   },
 });

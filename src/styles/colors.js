@@ -8,8 +8,6 @@ const colors = {
   modalTransparent: '#000000aa',
   limeGreen: '#F5FADD',
   lightBorder: 'whitesmoke',
-  deleteRed: '#f57f8d',
-  saveGreen: '#ffea97',
 };
 
 export default colors;

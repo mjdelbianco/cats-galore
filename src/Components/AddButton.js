@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     right: '7%',
   },
   addIcon: {
-    width: 110,
+    width: 100,
     height: 110,
   },
 });

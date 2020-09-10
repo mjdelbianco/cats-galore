@@ -1,4 +1,4 @@
-import {PermissionsAndroid, ToastAndroid} from 'react-native';
+import {PermissionsAndroid, ToastAndroid, Alert} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
 export const chooseImage = async (fn, cat) => {
@@ -47,4 +47,37 @@ export const createCat = (newCat, addNewCat, setNewCat, setIsShown) => {
       ToastAndroid.TOP,
     );
   }
+};
+
+export const save = (action, singleCat, updateCat, toggleEdit) => {
+  if (singleCat.name && singleCat.age && singleCat.gender) {
+    updateCat(singleCat);
+    toggleEdit(action);
+  } else {
+    ToastAndroid.showWithGravity(
+      'Your cat must have a name, age and gender',
+      ToastAndroid.LONG,
+      ToastAndroid.TOP,
+    );
+  }
+};
+
+export const remove = (removeCat, singleCat, navigation) => {
+  Alert.alert(
+    '',
+    `Are you sure you want to delete ${singleCat.name} from your list?`,
+    [
+      {
+        text: 'Cancel',
+        onPress: navigation.navigate('Detail'),
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          removeCat(singleCat);
+          navigation.navigate('Home');
+        },
+      },
+    ],
+  );
 };

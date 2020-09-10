@@ -9,24 +9,22 @@ const UpdateInput = ({isEditable, singleCat, property, setSingleCat}) => {
         {property[0].toUpperCase() + property.slice(1)}
       </Text>
       <TextInput
-        style={[
-          styles.input,
-          isEditable
-            ? {
-                borderColor: colors.lightBorder,
-                borderRadius: 3,
-                paddingVertical: 1,
-                borderBottomWidth: 2,
-                borderRightWidth: 2,
-              }
-            : null,
-        ]}
-        maxLength={property === 'description' ? 200 : 50}
+        style={[styles.input, isEditable ? styles.editableInput : null]}
+        maxLength={
+          property === 'description'
+            ? 200
+            : property === 'age'
+            ? 2
+            : property === 'traits'
+            ? 100
+            : 20
+        }
         multiline={property === 'description' && true}
         placeholder={`No ${property} yet`}
         editable={isEditable}
         textAlignVertical="center"
         underlineColorAndroid="transparent"
+        keyboardType={property === 'age' ? 'numeric' : 'default'}
         onChangeText={(prop) => setSingleCat({...singleCat, [property]: prop})}>
         {singleCat[property]}
       </TextInput>
@@ -56,5 +54,12 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingVertical: 1,
     borderBottomWidth: 1,
+  },
+  editableInput: {
+    borderColor: colors.lightBorder,
+    borderRadius: 3,
+    paddingVertical: 1,
+    borderBottomWidth: 2,
+    borderRightWidth: 2,
   },
 });
