@@ -1,9 +1,9 @@
 # Cats Galore
-Cats Galore is an app that lets you keep track of all your cats :smiley_cat:!
+Cats Galore is an app that lets you keep track of all your cats :smiley_cat:, and other animals you might have!
 
 Due to my current OS, for the moment, it's an Android App. This project was built with [React Native](https://reactnative.dev/) and just a couple of npm packages. I used [Redux](https://redux.js.org/) for state management and [Redux Persist](https://github.com/rt2zz/redux-persist) with [Async Storage](https://react-native-community.github.io/async-storage/) as a data storage solution.
 
-![Cats Galore demo](demo/catsGaloreGif.gif)
+![Cats Galore demo](./demo/catsGaloreGif.gif)
 
 # The Challenge
 :heavy_check_mark: Show all cats.     
